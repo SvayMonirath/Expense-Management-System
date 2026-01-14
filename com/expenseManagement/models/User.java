@@ -10,6 +10,17 @@ public class User {
 
     // Constructor
     public User(String username, String email, String password) {
+
+        if (username == null || username.trim().isEmpty()) {
+            throw new IllegalArgumentException("Username cannot be empty");
+        }
+        if (email == null || email.trim().isEmpty() || !email.contains("@")) {
+            throw new IllegalArgumentException("Invalid email");
+        }
+        if (password == null || password.length() < 8) {
+            throw new IllegalArgumentException("Password must be at least 8 characters long");
+        }
+
         this.username = username;
         this.email = email;
         this.password = password;
@@ -23,7 +34,7 @@ public class User {
 
     public void showTransactions() {
         for (Transaction t : transactions) {
-            System.out.println("ID: " + t.getId() + ", Amount: " + t.getAmount() + ", Date: " + t.getDate() + ", Description: " + t.getDescription());
+            System.out.println(t.toString());
         }
     }
 
